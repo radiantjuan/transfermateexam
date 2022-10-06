@@ -1,4 +1,9 @@
 <?php
+/**
+ * Base model class
+ * 
+ * @author Radiant C. Juan
+ */
 
 class Model
 {
@@ -6,7 +11,7 @@ class Model
 
     function __construct()
     {
-        $postgres_connect = new PostgresDBConnect('localhost', 'librarydb', 'postgres', 'akosiegang1!');
+        $postgres_connect = new PostgresDBConnect('localhost', 'transfermate', 'postgres', 'akosiegang1!');
         $this->db_connection = $postgres_connect->db_connect();
     }
 }

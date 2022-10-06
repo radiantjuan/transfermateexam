@@ -5,12 +5,13 @@ spl_autoload_register(function ($class_name) {
 
 require __DIR__ . '/views/layouts/header.php';
 $request = $_SERVER['REQUEST_URI'];
+$controller = new Controller();
 switch ($request) {
     case '/':
-        require __DIR__ . '/views/index.php';
+        $controller->index();
         break;
     case '/import-data':
-        require __DIR__ . '/views/import.php';
+        $controller->import_xml_data_to_db();
         break;
     default:
         http_response_code(404);

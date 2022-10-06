@@ -1,9 +1,27 @@
 <?php
 
+/**
+ * Books model class for books table
+ * 
+ * @author Radiant C. Juan
+ */
 class BookModel extends Model
 {
+    /**
+     * @var string book name
+     */
     public $book_name;
+
+    /**
+     * @var string author ID from author table
+     */
     public $author_id;
+
+    /**
+     * Save books model
+     * 
+     * @return void
+     */
     public function save()
     {
         $dbconnection = $this->db_connection;

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Postgres database connection initialization class
+ * 
+ * @author Radiant C. Juan
+ */
 
 class PostgresDBConnect implements DBConnectionInterface
 {
