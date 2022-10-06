@@ -6,7 +6,7 @@ class Controller
     {
     }
 
-    public function index()
+    public function import_xml_data_to_db()
     {
 
         $xml_file_paths = [];
@@ -16,22 +16,20 @@ class Controller
         $books_array = [];
         foreach ($xml_file_paths as $xml_file_path) {
             $xml = simplexml_load_file($xml_file_path);
-            $books_array[] = [
-                'author' => (string)$xml->author[0],
-                'book' => (string)$xml->name[0]
-            ];
+            $books_array[(string)$xml->author[0]][] = (string)$xml->name[0];
         }
 
-        $author_array = array_map(function($val) {
-            return $val['author'];
-        }, $books_array);
-
-        foreach ($author_array as $author) {
+        foreach ($books_array as $author => $books) {
             $author_model = new AuthorModel();
             $author_model->author_name = $author;
-            $author_model->save();
+            $author_id = $author_model->save();
+            foreach ($books as $book) {
+                $book_model = new BookModel();
+                $book_model->book_name = $book;
+                $book_model->author_id = $author_id;
+                $book_model->save();
+            }
         }
-
     }
 
     private function iterate_through_folder($dir, $xml_file_paths)

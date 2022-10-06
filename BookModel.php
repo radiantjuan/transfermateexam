@@ -2,14 +2,14 @@
 
 class BookModel extends Model
 {
-    public $author_name;
-
+    public $book_name;
+    public $author_id;
     public function save()
     {
         $dbconnection = $this->db_connection;
-        $sql = $dbconnection->prepare('INSERT INTO authors (author_name)
-        VALUES (:author_name)');
-        $sql->bindValue('author_name', $this->author_name, PDO::PARAM_STR);
+        $sql = $dbconnection->prepare('INSERT INTO books (book_name, author_id) VALUES (:book_name, :author_id)');
+        $sql->bindValue('book_name', $this->book_name, PDO::PARAM_STR);
+        $sql->bindValue('author_id', $this->author_id, PDO::PARAM_INT);
         $sql->execute();
     }
 }
